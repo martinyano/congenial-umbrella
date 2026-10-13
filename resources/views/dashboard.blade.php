@@ -50,8 +50,9 @@
         </div>
 
         <!-- Catalog Books Grid -->
+                <!-- Catalog Books Grid -->
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            @forelse($latestBooks ?? [] as $book)
+            @forelse($books ?? [] as $book)
                 <div class="bg-white rounded-xl border border-slate-200 p-3 flex flex-col justify-between shadow-sm hover:shadow-md transition">
                     <div>
                         <!-- Header Badges -->
@@ -84,14 +85,14 @@
                     <!-- View Details Action -->
                     <div class="mt-3">
                         <a href="{{ route('books.public_show', $book->id) }}" 
-                           class="block w-full text-center bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold text-[11px] py-1 rounded-md shadow-sm transition">
+                        class="block w-full text-center bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold text-[11px] py-1 rounded-md shadow-sm transition">
                             View Details
                         </a>
                     </div>
                 </div>
             @empty
                 <div class="col-span-full py-12 text-center text-slate-400 text-sm">
-                    No books available in the catalog.
+                    No books found under this category.
                 </div>
             @endforelse
         </div>

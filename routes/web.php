@@ -1,15 +1,17 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\AdminTransactionController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\KioskController;
 use App\Http\Controllers\UserContoller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'welcome'])->name('guest.welcome');
@@ -19,20 +21,30 @@ Route::post('/kiosk/scan', [KioskController::class, 'processScan'])->name('kiosk
 Route::get('catalog/books/{book}', [BookController::class, 'publicShow'])->name('books.public_show');
 Route::get('catalog/books', [BookController::class, 'userIndex'])->name('books.index');
 
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])
-        ->middleware(['auth'])
-        ->name('dashboard');
+    // Single unified dashboard route that handles both Admins and Students
+    Route::get('/dashboard', function () {
+        $user = Auth::user();
+
+        // 1. Send admins to their admin panel
+        if ($user && $user->usertype === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
+        // Pass the request forward so filtering works
+        return app(DashboardController::class)->index();
+
+    })->name('dashboard');
     Route::get('/admin/dashboard', [AdminTransactionController::class, 'dashboard'])->name('admin.dashboard');
     Route::resource('books', BookController::class)->names('admin.books');
     Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories.index');
     Route::get('/authors', [AuthorController::class, 'index'])->name('admin.authors.index');
     Route::get('/users', [UserContoller::class, 'index'])->name('admin.users.index');
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/borrow/create', [BorrowController::class, 'create'])->name('borrow.create');
     Route::post('/borrow', [BorrowController::class, 'store'])->name('borrow.store');
     Route::get('/inventory', [InventoryController::class, 'index'])->name('admin.inventory');
