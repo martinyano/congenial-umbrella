@@ -26,6 +26,12 @@
                 <span class="font-bold text-lg text-slate-900 tracking-tight">{{ config('app.name', 'Library System') }}</span>
             </a>
 
+            <div>
+                <a href="{{route('kiosk.index')}}">
+                    Enter
+                </a>
+            </div>
+
             <!-- Auth Navigation -->
             @if (Route::has('login'))
                 <nav class="flex items-center gap-3">

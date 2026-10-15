@@ -56,13 +56,28 @@ class AdminTransactionController extends Controller
     // Accept Borrow Request
     public function approve(Borrow $borrow)
     {
+        $book = $borrow->book;
+
+        // Check if the book has available stock before approving
+        if (!$book || $book->quantity <= 0) {
+            return redirect()->back()->with('error', 'Cannot approve: This book is out of stock.');
+        }
+
+        // 1. Reduce book quantity by 1
+        $book->quantity -= 1;
+        if ($book->quantity === 0) {
+            $book->status = 'out of stock'; // or 'out of stock' depending on your schema
+        }
+        $book->save();
+
+        // 2. Update the borrow transaction status
         $borrow->update([
             'status'      => 'borrowed',
             'borrowed_at' => Carbon::now(),
             'due_at'      => Carbon::now()->addDays(7),
         ]);
 
-        return redirect()->back()->with('success', 'Borrow request approved!');
+        return redirect()->back()->with('success', 'Borrow request approved and inventory updated!');
     }
 
     // Deny Borrow Request
@@ -75,6 +90,16 @@ class AdminTransactionController extends Controller
     // Mark as Returned
     public function returnBook(Borrow $borrow)
     {
+        $book = $borrow->book;
+
+        if ($book) {
+            // 1. Increase book quantity back by 1
+            $book->quantity += 1;
+            $book->status = 'available'; // Reset status back to available
+            $book->save();
+        }
+
+        // 2. Update the borrow transaction status
         $borrow->update([
             'status'      => 'returned',
             'returned_at' => Carbon::now(),
