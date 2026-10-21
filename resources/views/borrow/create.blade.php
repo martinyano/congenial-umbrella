@@ -17,7 +17,7 @@
         <!-- Header -->
         <div class="text-center mb-6">
             <div class="inline-flex items-center justify-center w-12 h-12 bg-red-100 rounded-full mb-2">
-                <span class="text-xl">📚</span>
+                <span class="text-xl"></span>
             </div>
             <h2 class="text-2xl font-bold text-red-800">Borrow Form</h2>
             <p class="text-xs text-slate-500 mt-1">Select a book to initiate a borrowing request.</p>
@@ -62,7 +62,7 @@
             <!-- Auto-populated Description -->
             <div>
                 <label class="block text-xs font-bold text-red-900 mb-1">
-                    Description <span class="italic font-normal text-slate-500">(Optional)</span>
+                    Description <span class="italic font-normal text-slate-500"></span>
                 </label>
                 <textarea readonly rows="3" 
                           x-text="currentBook.description || 'No description available.'"

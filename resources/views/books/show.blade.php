@@ -24,7 +24,7 @@
 
             <div>
                 <label class="block text-xs font-bold text-red-900 mb-1">
-                    Description <span class="italic font-normal text-slate-500">(Optional)</span>
+                    Description <span class="italic font-normal text-slate-500"></span>
                 </label>
                 <textarea readonly rows="3" 
                         class="w-full rounded-lg border-slate-300 bg-slate-50 text-slate-700 text-sm p-2.5">{{ $book->description ?? '' }}</textarea>

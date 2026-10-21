@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('author_id')->constrained('authors')->onDelete('cascade');
+            $table->string('description');
             $table->string('title');
             $table->string('isbn')->unique()->nullable();
             $table->string('image')->nullable();
             $table->integer('quantity')->default(0);
-            $table->enum('status', ['available', 'borrowed', 'lost'])->default('available');
+            $table->enum('status', ['available', 'borrowed', 'lost', 'outofStock'])->default('available');
             $table->timestamps();
         });
     }
