@@ -66,7 +66,7 @@ class AdminTransactionController extends Controller
         // 1. Reduce book quantity by 1
         $book->quantity -= 1;
         if ($book->quantity === 0) {
-            $book->status = 'out of stock'; // or 'out of stock' depending on your schema
+            $book->status = 'borrowed'; // or 'out of stock' depending on your schema
         }
         $book->save();
 
