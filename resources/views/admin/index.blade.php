@@ -23,7 +23,7 @@
                         <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">
                             Available Books
                         </span>
-                        <div class="p-2.5 bg-emerald-100 rounded-xl text-emerald-700 text-lg">📚</div>
+                        <div class="p-2.5 bg-emerald-100 rounded-xl text-emerald-700 text-lg"></div>
                     </div>
                     <div class="text-3xl font-black text-slate-900">{{ $availableBooksCount ?? 0 }}</div>
                     <p class="text-xs text-slate-500 mt-2">Physical stock ready on shelves for checkout.</p>
@@ -35,7 +35,7 @@
                         <span class="text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-50 px-2.5 py-1 rounded-md border border-sky-100">
                             Borrowed Books
                         </span>
-                        <div class="p-2.5 bg-sky-100 rounded-xl text-sky-700 text-lg">📖</div>
+                        <div class="p-2.5 bg-sky-100 rounded-xl text-sky-700 text-lg"></div>
                     </div>
                     <div class="text-3xl font-black text-slate-900">{{ $borrowedBooksCount ?? 0 }}</div>
                     <p class="text-xs text-slate-500 mt-2">Active loans within approved lending window.</p>
@@ -47,7 +47,7 @@
                         <span class="text-xs font-bold uppercase tracking-wider text-red-700 bg-red-50 px-2.5 py-1 rounded-md border border-red-100">
                             Overdue Books
                         </span>
-                        <div class="p-2.5 bg-red-100 rounded-xl text-red-700 text-lg">⚠️️</div>
+                        <div class="p-2.5 bg-red-100 rounded-xl text-red-700 text-lg"></div>
                     </div>
                     <div class="text-3xl font-black text-red-600">{{ $overdueBooksCount ?? 0 }}</div>
                     <p class="text-xs text-slate-500 mt-2">Past expected return date with daily fines accrued.</p>

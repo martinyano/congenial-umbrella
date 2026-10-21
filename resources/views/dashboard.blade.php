@@ -10,7 +10,7 @@
                     Explore, evaluate, and utilize our information resources independently to extend your learning and research work.
                 </p>
             </div>
-            <span class="text-4xl hidden sm:inline">📚</span>
+            <span class="text-4xl hidden sm:inline"></span>
         </div>
 
         <!-- Auto-Flowing Category Filters -->
